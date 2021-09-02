@@ -1,6 +1,7 @@
+require("dotenv").config();
 // Frame work
-const { request } = require("express");
-const express= require("express");
+const express = require("express");
+const mongoose = require("mongoose");
 
 // database
 const database = require("./database/index");
@@ -10,6 +11,15 @@ const shapeAI= express();
 
 //configurations
 shapeAI.use(express.json());
+
+// Establish database connection
+mongoose.connect(process.env.MONGO_URL, 
+    {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    }
+)
+.then(() => console.log("connection established!!"));
 
 /* 
 Route           /
